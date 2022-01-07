@@ -4,7 +4,8 @@
   "description": "basic web scraper written in node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/eomisterman/scraper/issues"
   },
-  "homepage": "https://github.com/eomisterman/scraper#readme"
+  "homepage": "https://github.com/eomisterman/scraper#readme",
+  "devDependencies": {
+    "eslint": "^8.6.0"
+  },
+  "dependencies": {
+    "puppeteer": "^13.0.1"
+  }
 }
