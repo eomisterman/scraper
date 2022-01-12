@@ -1,15 +1,33 @@
 const puppeteer = require('puppeteer');
 
-async function scrape() {
+async function scrape(word) {
     const browser = await puppeteer.launch({})
     const page = await browser.newPage()
 
-    await page.goto('https://www.thesaurus.com/browse/smart')
-    var element = await page.waitForSelector(".css-1svjmo3 > li:nth-child(1) > a:nth-child(1)")
+    await page.goto(`https://www.thesaurus.com/browse/${word}`)
+
+    const selector = "a[class*='css-1kg1yv8 eh475bn0']"
+    var element = await page.$(selector)
     var text = await page.evaluate(it => it.text, element)
-    console.log(text)
+    
     browser.close()
+
+    return text
 }
 
-scrape()
-console.log("Hello, world")
+
+
+async function main() {
+    const args = process.argv.slice(2)
+    
+    if (args.length > 0) {
+        await args.map(
+            it => scrape(it)
+                .then(result => console.log(result))
+        )
+    } else {
+        console.error("No arguments provided")
+    }
+}
+
+main()
